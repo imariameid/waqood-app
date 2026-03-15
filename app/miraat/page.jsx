@@ -1,4 +1,3 @@
-"use client";
 import { useState, useEffect, useRef } from "react";
 
 // ══════════════════════════════════════════
@@ -397,6 +396,71 @@ function LayerScreen({ layer, layerIndex, totalLayers, answer, answers, onChange
   );
 }
 
+function RatingWidget() {
+  const [rating, setRating] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
+  const [hover, setHover] = useState(0);
+
+  const handleSubmit = () => {
+    if (rating > 0) setSubmitted(true);
+  };
+
+  if (submitted) return (
+    <div style={{
+      background: "rgba(184,134,11,0.08)",
+      border: "1px solid rgba(184,134,11,0.3)",
+      borderRadius: 16, padding: "20px 32px",
+      textAlign: "center",
+    }}>
+      <p style={{ fontFamily: "'Amiri', serif", color: "#B8860B", fontSize: "1.2rem", marginBottom: 6 }}>شكراً على تقييمك ✦</p>
+      <p style={{ fontFamily: "'Noto Naskh Arabic', serif", color: "rgba(232,220,200,0.6)", fontSize: "0.85rem" }}>رأيك يساعدنا على التطوير</p>
+    </div>
+  );
+
+  return (
+    <div style={{
+      background: "rgba(26,26,46,0.9)",
+      border: "1px solid rgba(184,134,11,0.2)",
+      borderRadius: 18, padding: "24px 32px",
+      textAlign: "center", width: "100%", maxWidth: 360,
+    }}>
+      <p style={{ fontFamily: "'Amiri', serif", color: "#E8DCC8", fontSize: "1.1rem", marginBottom: 6 }}>كيف كانت تجربتك؟</p>
+      <p style={{ fontFamily: "'Noto Naskh Arabic', serif", color: "rgba(232,220,200,0.5)", fontSize: "0.8rem", marginBottom: 16 }}>قيّم مرآة الروح</p>
+      <div style={{ display: "flex", gap: 8, justifyContent: "center", marginBottom: 16 }}>
+        {[1,2,3,4,5].map(star => (
+          <button
+            key={star}
+            onClick={() => setRating(star)}
+            onMouseEnter={() => setHover(star)}
+            onMouseLeave={() => setHover(0)}
+            style={{
+              background: "none", border: "none", cursor: "pointer",
+              fontSize: "2rem",
+              color: (hover || rating) >= star ? "#B8860B" : "rgba(255,255,255,0.15)",
+              transition: "all 0.2s",
+              transform: (hover || rating) >= star ? "scale(1.2)" : "scale(1)",
+            }}
+          >★</button>
+        ))}
+      </div>
+      <button
+        onClick={handleSubmit}
+        disabled={rating === 0}
+        style={{
+          background: rating > 0 ? "linear-gradient(135deg, #B8860B, #8B6500)" : "rgba(255,255,255,0.05)",
+          border: "none", borderRadius: 10,
+          padding: "11px 28px",
+          color: rating > 0 ? "#000" : "rgba(255,255,255,0.2)",
+          fontFamily: "'Noto Naskh Arabic', serif",
+          fontSize: "0.9rem", fontWeight: 700,
+          cursor: rating > 0 ? "pointer" : "not-allowed",
+          transition: "all 0.3s",
+        }}
+      >أرسل التقييم</button>
+    </div>
+  );
+}
+
 function ReportScreen({ answers, creationAnswer, onRestart }) {
   const [visible, setVisible] = useState(false);
   const [step, setStep] = useState(0);
@@ -535,7 +599,8 @@ function ReportScreen({ answers, creationAnswer, onRestart }) {
               </p>
             </div>
 
-            <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "center" }}>
+              <RatingWidget />
               <button onClick={onRestart} style={{
                 background: "transparent",
                 border: "1px solid rgba(184,134,11,0.4)",
@@ -544,18 +609,7 @@ function ReportScreen({ answers, creationAnswer, onRestart }) {
                 fontFamily: "'Noto Naskh Arabic', serif",
                 fontSize: "0.95rem", cursor: "pointer",
                 transition: "all 0.3s",
-              }}>أعد التجربة</button>
-              <button style={{
-                background: "linear-gradient(135deg, #B8860B, #8B6500)",
-                border: "none", borderRadius: 12,
-                padding: "13px 28px",
-                color: "#000", fontFamily: "'Amiri', serif",
-                fontSize: "1rem", fontWeight: 700,
-                cursor: "pointer",
-                boxShadow: "0 4px 24px rgba(184,134,11,0.4)",
-              }}>
-                أكمل رحلتك مع وقود الإنسان ✦
-              </button>
+              }}>أعد التجربة ↺</button>
             </div>
           </div>
         )}
