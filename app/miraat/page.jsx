@@ -602,13 +602,34 @@ function ReportScreen({ answers, creationAnswer, onRestart }) {
 
             <div style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "center" }}>
               <RatingWidget />
+              <a
+                href="https://www.tiktok.com/@imariameid"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  background: "linear-gradient(135deg, #000000, #111111)",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  borderRadius: 12, padding: "14px 32px",
+                  color: "#fff", fontFamily: "'Noto Naskh Arabic', serif",
+                  fontSize: "1rem", fontWeight: 700,
+                  cursor: "pointer", textDecoration: "none",
+                  display: "flex", alignItems: "center", gap: 10,
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+                  transition: "all 0.3s",
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/>
+                </svg>
+                تابعينا على تيك توك ✦
+              </a>
               <button onClick={onRestart} style={{
                 background: "transparent",
-                border: "1px solid rgba(184,134,11,0.4)",
-                borderRadius: 12, padding: "13px 28px",
-                color: "#B8860B",
+                border: "1px solid rgba(184,134,11,0.3)",
+                borderRadius: 12, padding: "12px 28px",
+                color: "rgba(184,134,11,0.7)",
                 fontFamily: "'Noto Naskh Arabic', serif",
-                fontSize: "0.95rem", cursor: "pointer",
+                fontSize: "0.9rem", cursor: "pointer",
                 transition: "all 0.3s",
               }}>أعد التجربة ↺</button>
             </div>
